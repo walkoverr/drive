@@ -3,6 +3,9 @@ const express = require('express')
 const router = express.Router();
 const{body, validationResult}= require('express-validator')
 
+router.get('/home',(req,res)=>{
+    res.render("home")
+})
 router.get('/register',(req,res)=>{
     res.render('register');
 })
@@ -19,13 +22,8 @@ router.post('/register',
             error:error.array(),
             message:"invalid "
         })
-    }
-     
-
-    
-    // console.log(error);
-    // res.send(error);   
-    // console.log(req.body.username)
-    // res.send('user registered')
+    }  
+    console.log(req.body)
+    res.send('user registered')
 })  
 module.exports= router;
