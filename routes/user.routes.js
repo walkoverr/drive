@@ -1,5 +1,6 @@
 const express = require('express')
-
+const user= require('../models/user.model')
+const mongoose = require("mongoose")
 const router = express.Router();
 const{body, validationResult}= require('express-validator')
 
@@ -23,7 +24,14 @@ router.post('/register',
             message:"invalid "
         })
     }  
-    console.log(req.body)
-    res.send('user registered')
+    // console.log(req.body)
+    // res.send('user registered')
+    const {email,username,password}= req.body
+    const newUser = user.create({
+        email:email,
+        username:username,
+        password:password,
+    })
+    res.json(newUser);
 })  
 module.exports= router;
