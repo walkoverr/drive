@@ -29,9 +29,9 @@ router.post('/register',
     // res.send('user registered')
     const {email,username,password}= req.body
     const hashpass = await bcrypt.hash(password,10);
-    const newUser =await user.create({
-        email:email,
+    const newUser = await user.create({
         username:username,
+        email:email,
         password:hashpass,
     })
     console.log(newUser);
@@ -45,13 +45,14 @@ router.get('/loginpage',(req,res)=>
 router.post('/loginpage',async(req,res)=>
     {
         const {username,password}= req.body
+        // const trimmedpass = req.body.password.trim();
         const exi =  await user.findOne({username:username})
         if(!exi)
         {
             return res.status(404).json({msg:"user not found pls register"});
         }
-       console.log(await bcrypt.hash(password,10))
-       console.log(exi.password)
+        // console.log(`trimmed pass is ${trimmedpass}`)
+        // console.log(`stored pass is ${exi.password}`)
        const  match = await bcrypt.compare(password,exi.password)
        console.log(match)
        if(!match){
