@@ -50,13 +50,13 @@ router.post('/loginpage',async(req,res)=>
         {
             return res.status(404).json({msg:"user not found pls register"});
         }
-        // console.log(await bcrypt.hash(password,10))
-        // console.log(exi.password)
-       const  match = await bcrypt.compare(password,exi.password)
-       console.log(match)
-       if(!match){
-        return res.status(404).json({msg:"pls give correct details"});
-       }
+    //     console.log(await bcrypt.hash(password,10))
+    //     console.log(exi.password)
+    //    const  match = await bcrypt.compare(password,exi.password)
+    //    console.log(match)
+    //    if(!match){
+    //     return res.status(404).json({msg:"pls give correct details"});
+    //    }
         return res.render("home")
     })
 module.exports= router;
