@@ -3,11 +3,12 @@ const user= require('../models/user.model')
 const mongoose = require("mongoose")
 const router = express.Router();
 const bcrypt = require("bcrypt")
+const jwt= require('jsonwebtoken')
 const{body, validationResult}= require('express-validator')
 
-router.get('/home',(req,res)=>{
-    res.render("home")
-})
+// router.get('/home',(req,res)=>{
+//     res.render("home")
+// })
 router.get('/register',(req,res)=>{
     res.render('register');
 })
@@ -35,7 +36,7 @@ router.post('/register',
         password:hashpass,
     })
     console.log(newUser);
-    res.json({newUser});
+    res.json({message:'registered!'});
 }) 
 
 router.get('/loginpage',(req,res)=>
@@ -45,19 +46,34 @@ router.get('/loginpage',(req,res)=>
 router.post('/loginpage',async(req,res)=>
     {
         const {username,password}= req.body
-        // const trimmedpass = req.body.password.trim();
-        const exi =  await user.findOne({username:username})
+        if(!username || !password)
+        {
+            return res.status(400).json({message:`username and password are required`})
+        }
+        const exi =  await user.findOne(
+            {
+                username:username
+            }
+        )
         if(!exi)
         {
             return res.status(404).json({msg:"user not found pls register"});
         }
-        // console.log(`trimmed pass is ${trimmedpass}`)
-        // console.log(`stored pass is ${exi.password}`)
        const  match = await bcrypt.compare(password,exi.password)
        console.log(match)
        if(!match){
         return res.status(404).json({msg:"pls give correct details"});
        }
-        return res.render("home")
+    //    res.render("home");
+        
+    //    json web tokens
+        const token = jwt.sign({
+            userId: user.id,
+            email:user.email,
+            username:user.username
+        },process.env.JWT_SECRET,)
+        res.cookie('token',token);
+        res.send('Logged In')
     })
+   
 module.exports= router;
