@@ -64,14 +64,14 @@ router.post('/loginpage',async(req,res)=>
        if(!match){
         return res.status(404).json({msg:"pls give correct details"});
        }
-    //    res.render("home");
+    //  res.render("home");
         
-    //    json web tokens
+    //  json web tokens
         const token = jwt.sign({
             userId: user.id,
             email:user.email,
             username:user.username
-        },process.env.JWT_SECRET,)
+        },process.env.JWT_SECRET)
         res.cookie('token',token);
         res.send('Logged In')
     })
