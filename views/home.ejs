@@ -15,10 +15,9 @@
     <button onclick="showPopUp()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
       upload file
     </button>
-    <div class="pop hidden backdrop-blur fixed top-0 left-0 h-screen w-screen flex item-center justify-center"> 
+    <div class="pop hidden backdrop-blur fixed top-0 left-0 h-screen w-screen flex  item-center justify-center"> 
 
     <form action="/upload-file" method="post" enctype="multipart/form-data">
-
 
     <div class="flex flex-col items-center justify-center w-96">
   <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -33,21 +32,32 @@
   </label>
 
   <button  class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded m-4">
-    upload file
+    Upload File
   </button>
 </form>
-  <button onclick="hidePopUp()" class="absolute top-4 right-4 text-gray-500 dark:text-gray-400 text-xl">
-    <i class="ri-close-large-line"></i>
-  </button>
 </div> 
-  </div>
+<button onclick="hidePopUp()" class="absolute top-4 right-4 text-gray-500 dark:text-gray-400 text-xl">
+  <i class="ri-close-large-line"></i>
+</button>
+</div>
   </main>
+  
+  
+  
+  
+  
+  
+  
+  
   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
-  <script>
-    function showPopUp(){
+
+<script>
+    function showPopUp()
+    {
       document.querySelector('.pop').style.display ='flex'
     }
-    function hidePopUp(){
+    function hidePopUp()
+    {
       document.querySelector('.pop').style.display ='none'
     }
   </script>
